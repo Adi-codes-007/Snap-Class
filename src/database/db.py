@@ -4,6 +4,8 @@ import time
 
 
 def safe_execute(query_builder, retries=2, delay=1.0):
+    if supabase is None or query_builder is None:
+        raise ConnectionError("Supabase client is not connected. Please verify your SUPABASE_URL and SUPABASE_KEY in Secrets.")
     for attempt in range(retries + 1):
         try:
             return query_builder.execute()

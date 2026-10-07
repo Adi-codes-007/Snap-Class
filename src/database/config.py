@@ -22,16 +22,15 @@ def is_supabase_configured():
     return bool(url and key and "your-project" not in url and "your-anon-key" not in key)
 
 url, key = get_supabase_credentials()
-try:
-    options = ClientOptions(
-        postgrest_client_timeout=60,
-        storage_client_timeout=60,
-        function_client_timeout=60
-    )
-    supabase: Client = create_client(
-        url or "https://placeholder.supabase.co",
-        key or "placeholder-key",
-        options=options
-    )
-except Exception:
-    supabase = None
+supabase = None
+
+if is_supabase_configured():
+    try:
+        options = ClientOptions(
+            postgrest_client_timeout=60,
+            storage_client_timeout=60,
+            function_client_timeout=60
+        )
+        supabase = create_client(url, key, options=options)
+    except Exception as e:
+        supabase = None
