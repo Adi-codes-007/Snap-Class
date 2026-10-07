@@ -14,7 +14,8 @@ def style_background_home():
                 .stApp div[data-testid="stColumn"]{
                     background-color:#E0E3FF !important;
                     padding:2.5rem !important;
-                    border-radius: 5rem !important;
+                    border-radius: 2rem !important;
+                    box-shadow: 0 12px 32px rgba(0,0,0,0.12) !important;
                     }
         </style>  
 

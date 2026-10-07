@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "landing/app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/landing/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "landing/app.py"
+    }
+  ]
+}
