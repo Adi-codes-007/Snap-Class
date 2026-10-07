@@ -308,18 +308,18 @@ def teacher_tab_attendance_records():
 
 def login_teacher(username, password):
     if not username or not password:
-        return False
-    
-    teacher = teacher_login(username, password)
+        return False, "Please enter both username and password."
+    try:
+        teacher = teacher_login(username, password)
+        if teacher:
+            st.session_state.user_role = 'teacher'
+            st.session_state.teacher_data = teacher
+            st.session_state.is_logged_in = True
+            return True, "Login successful"
+        return False, "Invalid username and password combo"
+    except Exception as e:
+        return False, f"Database connection error: {e}"
 
-    if teacher:
-        st.session_state.user_role ='teacher'
-        st.session_state.teacher_data = teacher
-        st.session_state.is_logged_in = True
-        return True
-    
-
-    return False
 def teacher_screen_login():
     c1, c2 = st.columns(2, vertical_alignment='center', gap='xxlarge')
     with c1:
@@ -360,13 +360,14 @@ def teacher_screen_login():
 
         with btnc1:
             if st.button('Login', icon=':material/passkey:', shortcut='control+enter', width='stretch'):
-                if login_teacher(teacher_username, teacher_pass):
+                success, msg = login_teacher(teacher_username, teacher_pass)
+                if success:
                     st.toast("welcome back!", icon="👋")
                     import time
                     time.sleep(1)
                     st.rerun()
                 else:
-                    st.error("Invalid username and password combo")
+                    st.error(msg)
 
         with btnc2:
             if st.button('Register Instead', type="primary", icon=':material/passkey:', width='stretch'):
