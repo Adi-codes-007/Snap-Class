@@ -351,7 +351,7 @@ def teacher_screen_login():
 
     with col_right:
         st.subheader('Faculty Login')
-        teacher_username = st.text_input("Enter username", placeholder='ananyaroy')
+        teacher_username = st.text_input("Enter username", placeholder='faculty_username')
         teacher_pass = st.text_input("Enter password", type='password', placeholder="Enter password")
 
         st.divider()
@@ -428,8 +428,8 @@ def teacher_screen_register():
     with col_right:
         st.subheader('Register Faculty Account')
 
-        teacher_username = st.text_input("Enter username", placeholder='ananyaroy')
-        teacher_name = st.text_input("Enter name", placeholder='Ananya Roy')
+        teacher_username = st.text_input("Enter username", placeholder='faculty_username')
+        teacher_name = st.text_input("Enter name", placeholder='Professor Name')
         teacher_pass = st.text_input("Enter password", type='password', placeholder="Enter password")
         teacher_pass_confirm = st.text_input("Confirm your password", type='password', placeholder="Enter password")
 
